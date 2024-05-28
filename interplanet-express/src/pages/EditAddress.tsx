@@ -1,13 +1,31 @@
+import React, { useState, useEffect } from 'react';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { Address } from '../interfaces/Address';
+import { useNavigate } from 'react-router-dom';
 
-const EditAddress: React.FC = () => {
+interface EditAddressProps {
+  address: Address | null;
+  updateAddress: (updatedAddress: Address) => void;
+}
+
+const EditAddress: React.FC<EditAddressProps> = ({ address, updateAddress }) => {
   const [planet, setPlanet] = useState<"Terra" | "Marte">("Terra");
   const [location, setLocation] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (address) {
+      setPlanet(address.planet as "Terra" | "Marte");
+      setLocation(address.location);
+    }
+  }, [address]);
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Endereço atualizado: ${planet} - ${location}`);
+    if (address) {
+      updateAddress({ planet, location });
+      navigate('/');
+    }
   };
 
   return (
