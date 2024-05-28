@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { Address } from "../interfaces/Address";
 
-const RegisterAddress: React.FC = () => {
+interface RegisterAddressProps {
+  addAddress: (newAddress: Address) => void;
+}
+
+const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
   const [planet, setPlanet] = useState<"Terra" | "Marte">("Terra");
   const [location, setLocation] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Endereço cadastrado: ${planet} - ${location}`);
+    addAddress({ planet, location });
+    setLocation("");
   };
 
   return (
