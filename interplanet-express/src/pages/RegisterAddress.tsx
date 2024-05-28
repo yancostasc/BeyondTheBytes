@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import { Address } from "../interfaces/Address";
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Address } from '../interfaces/Address';
 
 interface RegisterAddressProps {
   addAddress: (newAddress: Address) => void;
@@ -17,38 +17,34 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
   };
 
   return (
-    <div>
-      <h1>Cadastro de Endereço</h1>
+    <Box>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Cadastro de Endereço
+      </Typography>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Planeta:
-            <select
-              value={planet}
-              onChange={(e) => setPlanet(e.target.value as "Terra" | "Marte")}
-            >
-              <option value="Terra">Terra</option>
-              <option value="Marte">Marte</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Localização:
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder={
-                planet === "Terra" ? "Cidade, País" : "Lote de 4 dígitos"
-              }
-              required
-            />
-          </label>
-        </div>
-        <button type="submit">Cadastrar</button>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Planeta</InputLabel>
+          <Select
+            value={planet}
+            onChange={(e) => setPlanet(e.target.value as "Terra" | "Marte")}
+          >
+            <MenuItem value="Terra">Terra</MenuItem>
+            <MenuItem value="Marte">Marte</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField
+          fullWidth
+          margin="normal"
+          label={planet === "Terra" ? "Cidade, País" : "Lote de 4 dígitos"}
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          required
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Cadastrar
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 

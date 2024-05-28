@@ -1,18 +1,23 @@
-import React from "react";
-import { AddressListProps } from "../interfaces/AddressListProps";
+import { List, ListItem, ListItemText, Typography } from '@mui/material';
+import React from 'react';
+import { AddressListProps } from '../interfaces/AddressListProps';
 
 const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
   return (
     <div>
-      <h2>Lista de Endereços</h2>
-      <ul>
+      <Typography variant="h4" component="h2" gutterBottom>
+        Lista de Endereços
+      </Typography>
+      <List>
         {addresses.map((address, index) => (
-          <li key={index}>
-            <strong>Planeta:</strong> {address.planet},{" "}
-            <strong>Localização:</strong> {address.location}
-          </li>
+          <ListItem key={index}>
+            <ListItemText
+              primary={`Planeta: ${address.planet}`}
+              secondary={`Localização: ${address.location}`}
+            />
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
