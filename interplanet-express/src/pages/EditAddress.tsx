@@ -1,59 +1,127 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
-import { Address } from '../interfaces/Address';
-import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Planet } from "../enums/Planet";
+import { Address } from "../interfaces/Address";
+import { EditAddressProps } from "../interfaces/EditAddressProps";
 
-interface EditAddressProps {
-  address: Address | null;
-  updateAddress: (updatedAddress: Address) => void;
-}
-
-const EditAddress: React.FC<EditAddressProps> = ({ address, updateAddress }) => {
-  const [planet, setPlanet] = useState<"Terra" | "Marte">("Terra");
-  const [location, setLocation] = useState("");
+const EditAddress: React.FC<EditAddressProps> = ({
+  address,
+  updateAddress,
+}) => {
+  const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
+  const [destinationPlanet, setDestinationPlanet] = useState<Planet>(
+    Planet.Earth
+  );
+  const [originLocation, setOriginLocation] = useState("");
+  const [destinationLocation, setDestinationLocation] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (address) {
-      setPlanet(address.planet as "Terra" | "Marte");
-      setLocation(address.location);
+      setOriginPlanet(address.originPlanet);
+      setDestinationPlanet(address.destinationPlanet);
+      setOriginLocation(address.originLocation);
+      setDestinationLocation(address.destinationLocation);
     }
   }, [address]);
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     if (address) {
-      updateAddress({ planet, location });
-      navigate('/');
+      const updatedAddress: Address = {
+        originPlanet: address.originPlanet,
+        destinationPlanet: address.destinationPlanet,
+        destinationLocation: address.destinationLocation,
+        packageDescription: address.packageDescription,
+        notes: address.notes,
+        originLocation: address.originLocation,
+      };
+      updateAddress(updatedAddress);
+      navigate("/");
     }
   };
 
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Edição de Endereço
+        Edit Address
       </Typography>
       <form onSubmit={handleUpdate}>
-        <FormControl fullWidth margin="normal">
-          <InputLabel>Planeta</InputLabel>
-          <Select
-            value={planet}
-            onChange={(e) => setPlanet(e.target.value as "Terra" | "Marte")}
+        <FormControl component="fieldset" fullWidth margin="normal">
+          <FormLabel component="legend">Origin Planet</FormLabel>
+          <RadioGroup
+            row
+            aria-label="originPlanet"
+            name="originPlanet"
+            value={originPlanet}
+            onChange={(e) => setOriginPlanet(e.target.value as Planet)}
           >
-            <MenuItem value="Terra">Terra</MenuItem>
-            <MenuItem value="Marte">Marte</MenuItem>
-          </Select>
+            <FormControlLabel
+              value={Planet.Earth}
+              control={<Radio />}
+              label="Earth"
+            />
+            <FormControlLabel
+              value={Planet.Mars}
+              control={<Radio />}
+              label="Mars"
+            />
+          </RadioGroup>
         </FormControl>
         <TextField
           fullWidth
           margin="normal"
-          label={planet === "Terra" ? "Cidade, País" : "Lote de 4 dígitos"}
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          label={
+            originPlanet === Planet.Earth ? "City, Country" : "4-digit Lot"
+          }
+          value={originLocation}
+          onChange={(e) => setOriginLocation(e.target.value)}
+          required
+        />
+        <FormControl component="fieldset" fullWidth margin="normal">
+          <FormLabel component="legend">Destination Planet</FormLabel>
+          <RadioGroup
+            row
+            aria-label="destinationPlanet"
+            name="destinationPlanet"
+            value={destinationPlanet}
+            onChange={(e) => setDestinationPlanet(e.target.value as Planet)}
+          >
+            <FormControlLabel
+              value={Planet.Earth}
+              control={<Radio />}
+              label="Earth"
+            />
+            <FormControlLabel
+              value={Planet.Mars}
+              control={<Radio />}
+              label="Mars"
+            />
+          </RadioGroup>
+        </FormControl>
+        <TextField
+          fullWidth
+          margin="normal"
+          label={
+            destinationPlanet === Planet.Earth ? "City, Country" : "4-digit Lot"
+          }
+          value={destinationLocation}
+          onChange={(e) => setDestinationLocation(e.target.value)}
           required
         />
         <Button type="submit" variant="contained" color="primary">
-          Atualizar
+          Update
         </Button>
       </form>
     </Box>
