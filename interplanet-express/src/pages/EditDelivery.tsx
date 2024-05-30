@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
 import {
   Box,
+  Breadcrumbs,
   Button,
   FormControl,
   FormControlLabel,
   FormLabel,
+  Grid,
+  Link as MuiLink,
   Radio,
   RadioGroup,
   TextField,
   Typography,
-  Grid,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Delivery } from "../interfaces/Delivery";
 import { EditDeliveryProps } from "../interfaces/EditDeliveryProps";
 
 const EditDelivery: React.FC<EditDeliveryProps> = ({
-  Delivery,
+  delivery,
   updateDelivery,
 }) => {
+  const { deliveryId = "" } = useParams<{ deliveryId?: string }>();
   const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
   const [destinationPlanet, setDestinationPlanet] = useState<Planet>(
     Planet.Earth
@@ -37,24 +40,25 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Delivery) {
-      setOriginPlanet(Delivery.originPlanet);
-      setDestinationPlanet(Delivery.destinationPlanet);
-      setOriginDescription(Delivery.originLocation || "");
-      setDestinationDescription(Delivery.destinationLocation || "");
-      setPackageDescription(Delivery.packageDescription || "");
-      setNotes(Delivery.notes || "");
-      setOriginLatitude(Delivery.originLatitude || 0);
-      setOriginLongitude(Delivery.originLongitude || 0);
-      setDestinationLatitude(Delivery.destinationLatitude || 0);
-      setDestinationv(Delivery.destinationLongitude || 0);
+    if (delivery) {
+      setOriginPlanet(delivery.originPlanet);
+      setDestinationPlanet(delivery.destinationPlanet);
+      setOriginDescription(delivery.originLocation || "");
+      setDestinationDescription(delivery.destinationLocation || "");
+      setPackageDescription(delivery.packageDescription || "");
+      setNotes(delivery.notes || "");
+      setOriginLatitude(delivery.originLatitude || 0);
+      setOriginLongitude(delivery.originLongitude || 0);
+      setDestinationLatitude(delivery.destinationLatitude || 0);
+      setDestinationv(delivery.destinationLongitude || 0);
     }
-  }, [Delivery]);
+  }, [delivery]);
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    if (Delivery) {
+    if (delivery) {
       const updatedDelivery: Delivery = {
+        deliveryId: deliveryId,
         originPlanet: originPlanet,
         destinationPlanet: destinationPlanet,
         originLocation: originDescription,
@@ -73,6 +77,22 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
 
   return (
     <Box>
+      <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
+        <Typography variant="body2" sx={{ mr: 1 }}>
+          &lt;
+        </Typography>
+        <Breadcrumbs aria-label="breadcrumb">
+          <MuiLink
+            component={RouterLink}
+            to="/"
+            underline="hover"
+            color="inherit"
+          >
+            Deliveries
+          </MuiLink>
+          <Typography color="text.primary">Edit Delivery</Typography>
+        </Breadcrumbs>
+      </Box>
       <Typography variant="h4" component="h1" gutterBottom>
         Edit Delivery
       </Typography>

@@ -1,6 +1,7 @@
 import { Planet } from "../enums/Planet";
 
 export interface Delivery {
+  deliveryId: string;
   originPlanet: Planet;
   destinationPlanet: Planet;
   originLocation: string;

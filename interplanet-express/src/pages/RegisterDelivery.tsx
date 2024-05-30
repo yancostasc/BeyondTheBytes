@@ -20,25 +20,30 @@ import { Delivery } from "../interfaces/Delivery";
 import { RegisterDeliveryProps } from "../interfaces/RegisterDeliveryProps";
 import { Planet } from "../enums/Planet";
 import { countriesAndCapitals } from "../data/Countries";
+import { v4 as uuidv4 } from "uuid";
 
 const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
+  const [deliveryId, setDeliveryId] = useState("");
   const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
   const [destinationPlanet, setDestinationPlanet] = useState<Planet>(
     Planet.Earth
   );
   const [originDescription, setOriginDescription] = useState("");
-  const [destinationDescription, setDestinationDescription] = useState("");
-  const [packageDescription, setPackageDescription] = useState("");
-  const [notes, setNotes] = useState("");
-  const [emptyFieldsAlert, setEmptyFieldsAlert] = useState(false);
-  const [successAlert, setSuccessAlert] = useState(false);
   const [originLatitude, setOriginLatitude] = useState(0);
   const [originLongitude, setOriginLongitude] = useState(0);
+  const [destinationDescription, setDestinationDescription] = useState("");
   const [destinationLatitude, setDestinationLatitude] = useState(0);
   const [destinationLongitude, setDestinationLongitude] = useState(0);
+  const [packageDescription, setPackageDescription] = useState("");
+  const [notes, setNotes] = useState("");
+
+  const [emptyFieldsAlert, setEmptyFieldsAlert] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setDeliveryId(uuidv4());
+
     const fetchRandomCoordinates = () => {
       const randomIndex = Math.floor(
         Math.random() * countriesAndCapitals.length
@@ -75,6 +80,8 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
   const handleSubmit = (e: React.FormEvent, shouldNavigate: boolean) => {
     e.preventDefault();
 
+    const newDeliveryId = uuidv4();
+
     if (
       originDescription.trim() === "" ||
       destinationDescription.trim() === "" ||
@@ -85,6 +92,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
     }
 
     const newDelivery: Delivery = {
+      deliveryId: newDeliveryId,
       originPlanet,
       destinationPlanet,
       originLocation: originDescription,
@@ -98,10 +106,6 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
     };
 
     addDelivery(newDelivery);
-    setOriginDescription("");
-    setDestinationDescription("");
-    setPackageDescription("");
-    setNotes("");
     setSuccessAlert(true);
 
     if (shouldNavigate) {

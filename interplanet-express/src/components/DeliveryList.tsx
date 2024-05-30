@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
 import {
-  EditOutlined,
-  DeleteOutlineOutlined,
   AddCircleOutline,
+  DeleteOutlineOutlined,
+  EditOutlined,
+  ArticleOutlined,
 } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Grid,
   IconButton,
   List,
   ListItem,
   ListItemText,
-  Typography,
-  Tooltip,
   Snackbar,
-  Alert,
-  Icon,
+  Tooltip,
+  Typography,
 } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
+import { pink } from "@mui/material/colors";
+import "leaflet/dist/leaflet.css";
+import React, { useEffect, useState } from "react";
+import { Circle, MapContainer, TileLayer } from "react-leaflet";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Delivery } from "../interfaces/Delivery";
 import { DeliveryListProps } from "../interfaces/DeliveryListProps";
-import { pink } from "@mui/material/colors";
-import { MapContainer, TileLayer, Marker, Circle, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 
 const DeliveryList: React.FC<DeliveryListProps> = ({
   Deliveries,
@@ -56,9 +56,9 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
     }
   }, [isDeliveryEdited]);
 
-  const handleEditClick = (Delivery: Delivery) => {
-    setSelectedDelivery(Delivery);
-    navigate("/edit");
+  const handleEditClick = (delivery: Delivery) => {
+    setSelectedDelivery(delivery);
+    navigate(`/edit/${delivery.deliveryId}`);
   };
 
   const handleDeleteClick = (Delivery: Delivery) => {
@@ -91,7 +91,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
           Deliveries
         </Typography>
         <Tooltip title="New Delivery">
-          <IconButton color="primary" component={Link} to="/register">
+          <IconButton color="primary" component={RouterLink} to="/register">
             <AddCircleOutline />
           </IconButton>
         </Tooltip>
@@ -151,6 +151,14 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                 alignItems={"center"}
                 justifyContent={"flex-end"}
               >
+                <Tooltip title="View">
+                  <IconButton
+                    aria-label="view"
+                    onClick={() => handleEditClick(delivery)}
+                  >
+                    <ArticleOutlined color="primary" />
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title="Edit">
                   <IconButton
                     aria-label="edit"

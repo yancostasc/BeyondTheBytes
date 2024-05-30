@@ -17,7 +17,7 @@ import EditDelivery from "./pages/EditDelivery";
 import RegisterDelivery from "./pages/RegisterDelivery";
 
 const App: React.FC = () => {
-  const [Deliveries, setDeliveries] = useState<Delivery[]>([]);
+  const [deliveries, setDeliveries] = useState<Delivery[]>([]);
   const [selectedDelivery, setSelectedDelivery] = useState<Delivery | null>(
     null
   );
@@ -25,23 +25,23 @@ const App: React.FC = () => {
   const [isDeliveryEdited, setIsDeliveryEdited] = useState<boolean>(false);
 
   const addDelivery = (newDelivery: Delivery) => {
-    setDeliveries([...Deliveries, newDelivery]);
+    setDeliveries([...deliveries, newDelivery]);
     setIsNewDeliveryAdded(true);
   };
 
   const updateDelivery = (updatedDelivery: Delivery) => {
     setDeliveries(
-      Deliveries.map((addr) =>
-        addr === selectedDelivery ? updatedDelivery : addr
+      deliveries.map((delivery) =>
+        delivery === selectedDelivery ? updatedDelivery : delivery
       )
     );
     setSelectedDelivery(null);
     setIsDeliveryEdited(true);
   };
 
-  const deleteDelivery = (DeliveryToDelete: Delivery) => {
+  const deleteDelivery = (deliveryToDelete: Delivery) => {
     setDeliveries(
-      Deliveries.filter((Delivery) => Delivery !== DeliveryToDelete)
+      deliveries.filter((deliveries) => deliveries !== deliveryToDelete)
     );
   };
 
@@ -98,7 +98,7 @@ const App: React.FC = () => {
               path="/"
               element={
                 <DeliveryList
-                  Deliveries={Deliveries}
+                  Deliveries={deliveries}
                   setSelectedDelivery={setSelectedDelivery}
                   deleteDelivery={deleteDelivery}
                   isNewDeliveryAdded={isNewDeliveryAdded}
@@ -111,11 +111,11 @@ const App: React.FC = () => {
               element={<RegisterDelivery addDelivery={addDelivery} />}
             />
             <Route
-              path="/edit"
+              path="/edit/:deliveryId"
               element={
                 <EditDelivery
-                  Delivery={selectedDelivery}
                   updateDelivery={updateDelivery}
+                  delivery={selectedDelivery}
                 />
               }
             />
