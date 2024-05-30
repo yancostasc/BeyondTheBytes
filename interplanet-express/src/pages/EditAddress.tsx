@@ -65,7 +65,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
       </Typography>
       <form onSubmit={handleUpdate}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={3}>
             <FormControl component="fieldset" fullWidth margin="normal">
               <FormLabel component="legend">Origin Planet</FormLabel>
               <RadioGroup
@@ -88,7 +88,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={9}>
             <TextField
               fullWidth
               margin="normal"
@@ -100,7 +100,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               required
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={3}>
             <FormControl component="fieldset" fullWidth margin="normal">
               <FormLabel component="legend">Destination Planet</FormLabel>
               <RadioGroup
@@ -123,7 +123,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={9}>
             <TextField
               fullWidth
               margin="normal"
@@ -156,7 +156,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               onChange={(e) => setNotes(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} display="flex" justifyContent="flex-end">
             <Button type="submit" variant="contained" color="primary">
               Update
             </Button>

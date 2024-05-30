@@ -77,9 +77,9 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
       <Typography variant="h4" component="h1" gutterBottom>
         Delivery
       </Typography>
-      <form onSubmit={(e) => handleSubmit(e, true)} style={{ width: "100%" }}>
+      <form style={{ width: "100%" }}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={3}>
             <FormControl component="fieldset" fullWidth margin="normal">
               <FormLabel component="legend">Origin Planet</FormLabel>
               <RadioGroup
@@ -102,7 +102,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={9}>
             <TextField
               fullWidth
               margin="normal"
@@ -114,7 +114,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
               required
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={3}>
             <FormControl component="fieldset" fullWidth margin="normal">
               <FormLabel component="legend">Destination Planet</FormLabel>
               <RadioGroup
@@ -137,7 +137,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={9}>
             <TextField
               fullWidth
               margin="normal"
@@ -170,14 +170,27 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
               onChange={(e) => setNotes(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} display="flex" justifyContent="flex-end" gap={2}>
-            <Button variant="outlined" color="secondary" onClick={handleCancel}>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            justifyContent="flex-end"
+            gap={2}
+            marginTop={4}
+          >
+            <Button variant="outlined" color="warning" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={(e) => handleSubmit(e, true)}
+            >
               Save
             </Button>
             <Button
+              type="submit"
               variant="contained"
               color="primary"
               onClick={(e) => handleSubmit(e, false)}

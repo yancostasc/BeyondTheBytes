@@ -69,11 +69,11 @@ const AddressList: React.FC<AddressListProps> = ({
             <Grid container alignItems="center">
               <Grid item xs={6}>
                 <ListItemText
-                  primary={address.packageDescription}
-                  secondary={address.notes}
+                  primary={address.originLocation}
+                  secondary={address.destinationLocation}
                 />
               </Grid>
-              <Grid item xs={3} display={"flex"} flexDirection={"row-reverse"}>
+              <Grid item xs={3} display={"flex"} flexDirection={"row"}>
                 <span style={getPlanetStyle(address.originPlanet)}>
                   {address.originPlanet}
                 </span>
