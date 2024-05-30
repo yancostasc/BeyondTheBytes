@@ -4,9 +4,11 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
+  IconButton,
   Box,
+  Tooltip,
 } from "@mui/material";
+import { LocalShipping } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AddressList from "./components/AddressList";
@@ -61,12 +63,11 @@ const App: React.FC = () => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Interplanet Express
               </Typography>
-              <Button color="inherit" component={Link} to="/">
-                Deliveries
-              </Button>
-              <Button color="inherit" component={Link} to="/register">
-                New Delivery
-              </Button>
+              <Tooltip title="Deliveries">
+                <IconButton color="inherit" component={Link} to="/">
+                  <LocalShipping />
+                </IconButton>
+              </Tooltip>
             </Toolbar>
           </AppBar>
         </Box>

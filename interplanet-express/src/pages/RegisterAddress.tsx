@@ -10,7 +10,10 @@ import {
   TextField,
   Typography,
   Grid,
+  Breadcrumbs,
+  Link as MuiLink,
 } from "@mui/material";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Address } from "../interfaces/Address";
 import { RegisterAddressProps } from "../interfaces/RegisterAddressProps";
 import { Planet } from "../enums/Planet";
@@ -24,8 +27,9 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
   const [destinationDescription, setDestinationDescription] = useState("");
   const [packageDescription, setPackageDescription] = useState("");
   const [notes, setNotes] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent, shouldNavigate: boolean) => {
     e.preventDefault();
 
     const newAddress: Address = {
@@ -42,14 +46,38 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
     setDestinationDescription("");
     setPackageDescription("");
     setNotes("");
+
+    if (shouldNavigate) {
+      navigate("/");
+    }
+  };
+
+  const handleCancel = () => {
+    navigate("/");
   };
 
   return (
     <Box>
+      <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
+        <Typography variant="body2" sx={{ mr: 1 }}>
+          &lt;
+        </Typography>
+        <Breadcrumbs aria-label="breadcrumb">
+          <MuiLink
+            component={RouterLink}
+            to="/"
+            underline="hover"
+            color="inherit"
+          >
+            Deliveries
+          </MuiLink>
+          <Typography color="text.primary">New Delivery</Typography>
+        </Breadcrumbs>
+      </Box>
       <Typography variant="h4" component="h1" gutterBottom>
         Delivery
       </Typography>
-      <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+      <form onSubmit={(e) => handleSubmit(e, true)} style={{ width: "100%" }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <FormControl component="fieldset" fullWidth margin="normal">
@@ -142,9 +170,19 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
               onChange={(e) => setNotes(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} display="flex" justifyContent="flex-end" gap={2}>
+            <Button variant="outlined" color="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
             <Button type="submit" variant="contained" color="primary">
-              New
+              Save
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={(e) => handleSubmit(e, false)}
+            >
+              Save Another
             </Button>
           </Grid>
         </Grid>

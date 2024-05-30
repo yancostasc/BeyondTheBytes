@@ -1,5 +1,8 @@
-import DeleteIcon from "@mui/icons-material/Delete"; // Importando o ícone de exclusão
-import EditIcon from "@mui/icons-material/Edit"; // Importando o ícone de edição
+import {
+  EditOutlined,
+  DeleteOutlineOutlined,
+  AddCircleOutline,
+} from "@mui/icons-material";
 import {
   Box,
   Grid,
@@ -8,12 +11,14 @@ import {
   ListItem,
   ListItemText,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Address } from "../interfaces/Address";
 import { AddressListProps } from "../interfaces/AddressListProps";
+import { pink } from "@mui/material/colors";
 
 const AddressList: React.FC<AddressListProps> = ({
   addresses,
@@ -43,9 +48,21 @@ const AddressList: React.FC<AddressListProps> = ({
 
   return (
     <Box>
-      <Typography variant="h4" component="h2" gutterBottom>
-        Deliveries
-      </Typography>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        mb={2}
+      >
+        <Typography variant="h4" component="h2">
+          Deliveries
+        </Typography>
+        <Tooltip title="New Delivery">
+          <IconButton color="primary" component={Link} to="/register">
+            <AddCircleOutline />
+          </IconButton>
+        </Tooltip>
+      </Box>
       <List>
         {addresses.map((address, index) => (
           <ListItem key={index} divider>
@@ -65,19 +82,23 @@ const AddressList: React.FC<AddressListProps> = ({
                 </span>
               </Grid>
               <Grid item xs={3} display={"flex"} flexDirection={"row-reverse"}>
-                <IconButton
-                  aria-label="edit"
-                  onClick={() => handleEditClick(address)}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => handleDeleteClick(address)}
-                  style={{ marginLeft: "0.5rem" }}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <Tooltip title="Delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteClick(address)}
+                    style={{ marginLeft: "0.5rem" }}
+                  >
+                    <DeleteOutlineOutlined sx={{ color: pink[500] }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Edit">
+                  <IconButton
+                    aria-label="edit"
+                    onClick={() => handleEditClick(address)}
+                  >
+                    <EditOutlined color="primary" />
+                  </IconButton>
+                </Tooltip>
               </Grid>
             </Grid>
           </ListItem>
