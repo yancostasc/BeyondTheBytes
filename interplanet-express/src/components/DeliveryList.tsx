@@ -15,6 +15,7 @@ import {
   Tooltip,
   Snackbar,
   Alert,
+  Icon,
 } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { Planet } from "../enums/Planet";
@@ -74,6 +75,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
       padding: "4px 8px",
       borderRadius: "4px",
       marginRight: "0.5rem",
+      fontSize: "10px",
     };
   };
 
@@ -115,6 +117,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                   dragging={false}
                   attributionControl={false}
                   doubleClickZoom={false}
+                  scrollWheelZoom={false}
                 >
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -124,7 +127,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                         delivery.destinationLatitude,
                         delivery.destinationLongitude,
                       ]}
-                      radius={800}
+                      radius={1000}
                       pathOptions={{
                         fillColor: "rgba(255, 182, 169)", // Cor mais forte para o preenchimento
                         color: "rgba(255, 182, 169)", // Cor mais forte para a borda
@@ -134,7 +137,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                 </MapContainer>
               </Grid>
 
-              <Grid item xs={6} marginLeft={2}>
+              <Grid item xs={7} marginLeft={2}>
                 <ListItemText
                   primary={delivery.originLocation}
                   secondary={delivery.destinationLocation}
@@ -143,17 +146,11 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
 
               <Grid
                 item
-                xs={3}
+                xs={2}
                 display={"flex"}
-                flexDirection={"row"}
                 alignItems={"center"}
+                justifyContent={"flex-end"}
               >
-                <span style={getPlanetStyle(delivery.originPlanet)}>
-                  {delivery.originPlanet}
-                </span>
-                <span style={getPlanetStyle(delivery.destinationPlanet)}>
-                  {delivery.destinationPlanet}
-                </span>
                 <Tooltip title="Edit">
                   <IconButton
                     aria-label="edit"
@@ -169,6 +166,26 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                   >
                     <DeleteOutlineOutlined sx={{ color: pink[500] }} />
                   </IconButton>
+                </Tooltip>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                display={"flex"}
+                alignItems={"center"}
+                marginTop={1}
+                marginLeft={1.8}
+              >
+                <Tooltip title={"Origin Planet"}>
+                  <span style={getPlanetStyle(delivery.originPlanet)}>
+                    {delivery.originPlanet}
+                  </span>
+                </Tooltip>
+                <Tooltip title={"Destination Planet"}>
+                  <span style={getPlanetStyle(delivery.destinationPlanet)}>
+                    {delivery.destinationPlanet}
+                  </span>
                 </Tooltip>
               </Grid>
             </Grid>
