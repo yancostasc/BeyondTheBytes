@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -19,6 +19,7 @@ import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Delivery } from "../interfaces/Delivery";
 import { RegisterDeliveryProps } from "../interfaces/RegisterDeliveryProps";
 import { Planet } from "../enums/Planet";
+import { countriesAndCapitals } from "../data/Countries";
 
 const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
   const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
@@ -31,7 +32,40 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
   const [notes, setNotes] = useState("");
   const [emptyFieldsAlert, setEmptyFieldsAlert] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
+  const [originLatitude, setOriginLatitude] = useState(0);
+  const [originLongitude, setOriginLongitude] = useState(0);
+  const [destinationLatitude, setDestinationLatitude] = useState(0);
+  const [destinationLongitude, setDestinationLongitude] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchRandomCoordinates = () => {
+      const randomIndex = Math.floor(
+        Math.random() * countriesAndCapitals.length
+      );
+
+      const randomCountry = countriesAndCapitals[randomIndex];
+      if (randomCountry) {
+        const { latitude, longitude } = randomCountry;
+        setOriginLatitude(latitude);
+        setOriginLongitude(longitude);
+        setDestinationLatitude(latitude);
+        setDestinationLongitude(longitude);
+      }
+    };
+
+    if (originDescription.trim() !== "") {
+      fetchRandomCoordinates();
+    }
+    if (destinationDescription.trim() !== "") {
+      fetchRandomCoordinates();
+    }
+  }, [
+    originDescription,
+    destinationDescription,
+    originPlanet,
+    destinationPlanet,
+  ]);
 
   const handleCloseAlert = () => {
     setEmptyFieldsAlert(false);
@@ -57,6 +91,10 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
       destinationLocation: destinationDescription,
       packageDescription,
       notes,
+      originLatitude,
+      originLongitude,
+      destinationLatitude,
+      destinationLongitude,
     };
 
     addDelivery(newDelivery);
@@ -96,7 +134,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
       <Typography variant="h4" component="h1" gutterBottom>
         Delivery
       </Typography>
-      <form style={{ width: "100%" }}>
+      <form style={{ width: "100%" }} onSubmit={(e) => handleSubmit(e, true)}>
         <Snackbar
           open={emptyFieldsAlert}
           autoHideDuration={2000}

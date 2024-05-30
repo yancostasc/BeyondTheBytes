@@ -1,0 +1,88 @@
+export const countriesAndCapitals = [
+  {
+    country: "Brazil",
+    capital: "Brasília",
+    latitude: -15.827167,
+    longitude: -47.921822,
+  },
+  {
+    country: "Canada",
+    capital: "Ottawa",
+    latitude: 45.42153,
+    longitude: -75.697193,
+  },
+  {
+    country: "China",
+    capital: "Beijing",
+    latitude: 39.9042,
+    longitude: 116.4074,
+  },
+  { country: "France", capital: "Paris", latitude: 48.8566, longitude: 2.3522 },
+  {
+    country: "Germany",
+    capital: "Berlin",
+    latitude: 52.520008,
+    longitude: 13.404954,
+  },
+  {
+    country: "India",
+    capital: "New Delhi",
+    latitude: 28.6139,
+    longitude: 77.209,
+  },
+  { country: "Italy", capital: "Rome", latitude: 41.9028, longitude: 12.4964 },
+  {
+    country: "Japan",
+    capital: "Tokyo",
+    latitude: 35.6895,
+    longitude: 139.6917,
+  },
+  {
+    country: "Russia",
+    capital: "Moscow",
+    latitude: 55.7558,
+    longitude: 37.6173,
+  },
+  {
+    country: "South Africa",
+    capital: "Pretoria",
+    latitude: -25.7461,
+    longitude: 28.1881,
+  },
+  {
+    country: "South Korea",
+    capital: "Seoul",
+    latitude: 37.5665,
+    longitude: 126.978,
+  },
+  {
+    country: "Spain",
+    capital: "Madrid",
+    latitude: 40.4168,
+    longitude: -3.7038,
+  },
+  {
+    country: "Switzerland",
+    capital: "Bern",
+    latitude: 46.9479,
+    longitude: 7.4446,
+  },
+  {
+    country: "Turkey",
+    capital: "Ankara",
+    latitude: 39.9334,
+    longitude: 32.8597,
+  },
+  {
+    country: "United Kingdom",
+    capital: "London",
+    latitude: 51.5074,
+    longitude: -0.1278,
+  },
+  {
+    country: "United States",
+    capital: "Washington, D.C.",
+    latitude: 38.9072,
+    longitude: -77.0369,
+  },
+];

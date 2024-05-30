@@ -5,6 +5,10 @@ export interface Delivery {
   destinationPlanet: Planet;
   originLocation: string;
   destinationLocation: string;
+  originLatitude: number;
+  originLongitude: number;
+  destinationLatitude: number;
+  destinationLongitude: number;
   packageDescription: string;
   notes?: string;
 }

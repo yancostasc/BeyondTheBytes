@@ -21,6 +21,8 @@ import { Planet } from "../enums/Planet";
 import { Delivery } from "../interfaces/Delivery";
 import { DeliveryListProps } from "../interfaces/DeliveryListProps";
 import { pink } from "@mui/material/colors";
+import { MapContainer, TileLayer, Marker, Circle, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 const DeliveryList: React.FC<DeliveryListProps> = ({
   Deliveries,
@@ -93,33 +95,69 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
         </Tooltip>
       </Box>
       <List>
-        {Deliveries.map((Delivery, index) => (
+        {Deliveries.map((delivery, index) => (
           <ListItem key={index} divider>
             <Grid container>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={6}>
+              <Grid item xs={2}>
+                <MapContainer
+                  center={[
+                    delivery.destinationLatitude,
+                    delivery.destinationLongitude,
+                  ]}
+                  zoom={13}
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                  }}
+                  zoomControl={false}
+                  dragging={false}
+                  attributionControl={false}
+                  doubleClickZoom={false}
+                >
+                  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+                  {delivery.destinationPlanet === Planet.Mars ? (
+                    <Circle
+                      center={[
+                        delivery.destinationLatitude,
+                        delivery.destinationLongitude,
+                      ]}
+                      radius={800}
+                      pathOptions={{
+                        fillColor: "rgba(255, 182, 169)", // Cor mais forte para o preenchimento
+                        color: "rgba(255, 182, 169)", // Cor mais forte para a borda
+                      }}
+                    ></Circle>
+                  ) : null}
+                </MapContainer>
+              </Grid>
+
+              <Grid item xs={6} marginLeft={2}>
                 <ListItemText
-                  primary={Delivery.originLocation}
-                  secondary={Delivery.destinationLocation}
+                  primary={delivery.originLocation}
+                  secondary={delivery.destinationLocation}
                 />
               </Grid>
+
               <Grid
                 item
-                xs={4}
+                xs={3}
                 display={"flex"}
                 flexDirection={"row"}
                 alignItems={"center"}
               >
-                <span style={getPlanetStyle(Delivery.originPlanet)}>
-                  {Delivery.originPlanet}
+                <span style={getPlanetStyle(delivery.originPlanet)}>
+                  {delivery.originPlanet}
                 </span>
-                <span style={getPlanetStyle(Delivery.destinationPlanet)}>
-                  {Delivery.destinationPlanet}
+                <span style={getPlanetStyle(delivery.destinationPlanet)}>
+                  {delivery.destinationPlanet}
                 </span>
                 <Tooltip title="Edit">
                   <IconButton
                     aria-label="edit"
-                    onClick={() => handleEditClick(Delivery)}
+                    onClick={() => handleEditClick(delivery)}
                   >
                     <EditOutlined color="primary" />
                   </IconButton>
@@ -127,7 +165,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                 <Tooltip title="Delete">
                   <IconButton
                     aria-label="delete"
-                    onClick={() => handleDeleteClick(Delivery)}
+                    onClick={() => handleDeleteClick(delivery)}
                   >
                     <DeleteOutlineOutlined sx={{ color: pink[500] }} />
                   </IconButton>

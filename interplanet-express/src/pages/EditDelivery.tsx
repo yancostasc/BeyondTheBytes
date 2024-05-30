@@ -29,6 +29,11 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
     useState<string>("");
   const [packageDescription, setPackageDescription] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
+  const [originLatitude, setOriginLatitude] = useState<number>(0);
+  const [originLongitude, setOriginLongitude] = useState<number>(0);
+  const [destinationLatitude, setDestinationLatitude] = useState<number>(0);
+  const [destinationLongitude, setDestinationv] = useState<number>(0);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,6 +44,10 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
       setDestinationDescription(Delivery.destinationLocation || "");
       setPackageDescription(Delivery.packageDescription || "");
       setNotes(Delivery.notes || "");
+      setOriginLatitude(Delivery.originLatitude || 0);
+      setOriginLongitude(Delivery.originLongitude || 0);
+      setDestinationLatitude(Delivery.destinationLatitude || 0);
+      setDestinationv(Delivery.destinationLongitude || 0);
     }
   }, [Delivery]);
 
@@ -52,6 +61,10 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
         destinationLocation: destinationDescription,
         packageDescription: packageDescription,
         notes: notes,
+        originLatitude: originLatitude,
+        originLongitude: originLongitude,
+        destinationLatitude: destinationLatitude,
+        destinationLongitude: destinationLongitude,
       };
       updateDelivery(updatedDelivery);
       navigate("/");
