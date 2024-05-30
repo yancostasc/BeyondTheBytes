@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   EditOutlined,
   DeleteOutlineOutlined,
@@ -12,8 +13,9 @@ import {
   ListItemText,
   Typography,
   Tooltip,
+  Snackbar,
+  Alert,
 } from "@mui/material";
-import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Address } from "../interfaces/Address";
@@ -24,8 +26,20 @@ const AddressList: React.FC<AddressListProps> = ({
   addresses,
   setSelectedAddress,
   deleteAddress,
+  isNewAddressAdded,
 }) => {
   const navigate = useNavigate();
+  const [showNewAddressAlert, setShowNewAddressAlert] = useState(false);
+
+  useEffect(() => {
+    if (isNewAddressAdded) {
+      setShowNewAddressAlert(true);
+      const timeout = setTimeout(() => {
+        setShowNewAddressAlert(false);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isNewAddressAdded]);
 
   const handleEditClick = (address: Address) => {
     setSelectedAddress(address);
@@ -104,6 +118,15 @@ const AddressList: React.FC<AddressListProps> = ({
           </ListItem>
         ))}
       </List>
+      <Snackbar
+        open={showNewAddressAlert}
+        autoHideDuration={2000}
+        onClose={() => setShowNewAddressAlert(false)}
+      >
+        <Alert severity="success" variant="filled">
+          New address added!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

@@ -12,6 +12,8 @@ import {
   Grid,
   Breadcrumbs,
   Link as MuiLink,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Address } from "../interfaces/Address";
@@ -27,10 +29,26 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
   const [destinationDescription, setDestinationDescription] = useState("");
   const [packageDescription, setPackageDescription] = useState("");
   const [notes, setNotes] = useState("");
+  const [emptyFieldsAlert, setEmptyFieldsAlert] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
   const navigate = useNavigate();
+
+  const handleCloseAlert = () => {
+    setEmptyFieldsAlert(false);
+    setSuccessAlert(false);
+  };
 
   const handleSubmit = (e: React.FormEvent, shouldNavigate: boolean) => {
     e.preventDefault();
+
+    if (
+      originDescription.trim() === "" ||
+      destinationDescription.trim() === "" ||
+      packageDescription.trim() === ""
+    ) {
+      setEmptyFieldsAlert(true);
+      return;
+    }
 
     const newAddress: Address = {
       originPlanet,
@@ -46,6 +64,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
     setDestinationDescription("");
     setPackageDescription("");
     setNotes("");
+    setSuccessAlert(true);
 
     if (shouldNavigate) {
       navigate("/");
@@ -78,6 +97,24 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
         Delivery
       </Typography>
       <form style={{ width: "100%" }}>
+        <Snackbar
+          open={emptyFieldsAlert}
+          autoHideDuration={2000}
+          onClose={handleCloseAlert}
+        >
+          <Alert severity="warning" variant="filled" sx={{ width: "100%" }}>
+            Please fill in all required fields.
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={successAlert}
+          autoHideDuration={2000}
+          onClose={handleCloseAlert}
+        >
+          <Alert severity="success" variant="filled" sx={{ width: "100%" }}>
+            Delivery added successfully.
+          </Alert>
+        </Snackbar>
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <FormControl component="fieldset" fullWidth margin="normal">

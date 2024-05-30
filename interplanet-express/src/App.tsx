@@ -19,9 +19,11 @@ import RegisterAddress from "./pages/RegisterAddress";
 const App: React.FC = () => {
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [isNewAddressAdded, setIsNewAddressAdded] = useState<boolean>(false);
 
   const addAddress = (newAddress: Address) => {
     setAddresses([...addresses, newAddress]);
+    setIsNewAddressAdded(true);
   };
 
   const updateAddress = (updatedAddress: Address) => {
@@ -93,6 +95,7 @@ const App: React.FC = () => {
                   addresses={addresses}
                   setSelectedAddress={setSelectedAddress}
                   deleteAddress={deleteAddress}
+                  isNewAddressAdded={isNewAddressAdded}
                 />
               }
             />
