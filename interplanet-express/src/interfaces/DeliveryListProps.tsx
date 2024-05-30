@@ -1,9 +1,9 @@
 import { Delivery } from "./Delivery";
 
-export interface AddressListProps {
-  addresses: Delivery[];
-  setSelectedAddress: (address: Delivery) => void;
-  deleteAddress: (address: Delivery) => void;
-  isNewAddressAdded: boolean;
-  isAddressEdited: boolean;
+export interface DeliveryListProps {
+  Deliveryes: Delivery[];
+  setSelectedDelivery: (Delivery: Delivery) => void;
+  deleteDelivery: (Delivery: Delivery) => void;
+  isNewDeliveryAdded: boolean;
+  isDeliveryEdited: boolean;
 }

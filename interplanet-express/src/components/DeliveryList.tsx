@@ -19,47 +19,47 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Delivery } from "../interfaces/Delivery";
-import { AddressListProps } from "../interfaces/DeliveryListProps";
+import { DeliveryListProps } from "../interfaces/DeliveryListProps";
 import { pink } from "@mui/material/colors";
 
-const AddressList: React.FC<AddressListProps> = ({
-  addresses,
-  setSelectedAddress,
-  deleteAddress,
-  isNewAddressAdded,
-  isAddressEdited,
+const DeliveryList: React.FC<DeliveryListProps> = ({
+  Deliveryes,
+  setSelectedDelivery,
+  deleteDelivery,
+  isNewDeliveryAdded,
+  isDeliveryEdited,
 }) => {
   const navigate = useNavigate();
-  const [showNewAddressAlert, setShowNewAddressAlert] = useState(false);
-  const [showEditedAddressAlert, setShowEditedAddressAlert] = useState(false);
+  const [showNewDeliveryAlert, setShowNewDeliveryAlert] = useState(false);
+  const [showEditedDeliveryAlert, setShowEditedDeliveryAlert] = useState(false);
 
   useEffect(() => {
-    if (isNewAddressAdded) {
-      setShowNewAddressAlert(true);
+    if (isNewDeliveryAdded) {
+      setShowNewDeliveryAlert(true);
       const timeout = setTimeout(() => {
-        setShowNewAddressAlert(false);
+        setShowNewDeliveryAlert(false);
       }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [isNewAddressAdded]);
+  }, [isNewDeliveryAdded]);
 
   useEffect(() => {
-    if (isAddressEdited) {
-      setShowEditedAddressAlert(true);
+    if (isDeliveryEdited) {
+      setShowEditedDeliveryAlert(true);
       const timeout = setTimeout(() => {
-        setShowEditedAddressAlert(false);
+        setShowEditedDeliveryAlert(false);
       }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [isAddressEdited]);
+  }, [isDeliveryEdited]);
 
-  const handleEditClick = (address: Delivery) => {
-    setSelectedAddress(address);
+  const handleEditClick = (Delivery: Delivery) => {
+    setSelectedDelivery(Delivery);
     navigate("/edit");
   };
 
-  const handleDeleteClick = (address: Delivery) => {
-    deleteAddress(address);
+  const handleDeleteClick = (Delivery: Delivery) => {
+    deleteDelivery(Delivery);
   };
 
   const getPlanetStyle = (planet: string) => {
@@ -90,28 +90,28 @@ const AddressList: React.FC<AddressListProps> = ({
         </Tooltip>
       </Box>
       <List>
-        {addresses.map((address, index) => (
+        {Deliveryes.map((Delivery, index) => (
           <ListItem key={index} divider>
             <Grid container alignItems="center">
               <Grid item xs={6}>
                 <ListItemText
-                  primary={address.originLocation}
-                  secondary={address.destinationLocation}
+                  primary={Delivery.originLocation}
+                  secondary={Delivery.destinationLocation}
                 />
               </Grid>
               <Grid item xs={3} display={"flex"} flexDirection={"row"}>
-                <span style={getPlanetStyle(address.originPlanet)}>
-                  {address.originPlanet}
+                <span style={getPlanetStyle(Delivery.originPlanet)}>
+                  {Delivery.originPlanet}
                 </span>
-                <span style={getPlanetStyle(address.destinationPlanet)}>
-                  {address.destinationPlanet}
+                <span style={getPlanetStyle(Delivery.destinationPlanet)}>
+                  {Delivery.destinationPlanet}
                 </span>
               </Grid>
               <Grid item xs={3} display={"flex"} flexDirection={"row-reverse"}>
                 <Tooltip title="Delete">
                   <IconButton
                     aria-label="delete"
-                    onClick={() => handleDeleteClick(address)}
+                    onClick={() => handleDeleteClick(Delivery)}
                     style={{ marginLeft: "0.5rem" }}
                   >
                     <DeleteOutlineOutlined sx={{ color: pink[500] }} />
@@ -120,7 +120,7 @@ const AddressList: React.FC<AddressListProps> = ({
                 <Tooltip title="Edit">
                   <IconButton
                     aria-label="edit"
-                    onClick={() => handleEditClick(address)}
+                    onClick={() => handleEditClick(Delivery)}
                   >
                     <EditOutlined color="primary" />
                   </IconButton>
@@ -131,18 +131,18 @@ const AddressList: React.FC<AddressListProps> = ({
         ))}
       </List>
       <Snackbar
-        open={showNewAddressAlert}
+        open={showNewDeliveryAlert}
         autoHideDuration={2000}
-        onClose={() => setShowNewAddressAlert(false)}
+        onClose={() => setShowNewDeliveryAlert(false)}
       >
         <Alert severity="success" variant="filled">
-          New address added!
+          New Delivery added!
         </Alert>
       </Snackbar>
       <Snackbar
-        open={showEditedAddressAlert}
+        open={showEditedDeliveryAlert}
         autoHideDuration={2000}
-        onClose={() => setShowEditedAddressAlert(false)}
+        onClose={() => setShowEditedDeliveryAlert(false)}
       >
         <Alert severity="success" variant="filled">
           Delivery edited successfully!
@@ -152,4 +152,4 @@ const AddressList: React.FC<AddressListProps> = ({
   );
 };
 
-export default AddressList;
+export default DeliveryList;

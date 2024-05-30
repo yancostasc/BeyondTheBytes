@@ -17,10 +17,10 @@ import {
 } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { Delivery } from "../interfaces/Delivery";
-import { RegisterAddressProps } from "../interfaces/RegisterDeliveryProps";
+import { RegisterDeliveryProps } from "../interfaces/RegisterDeliveryProps";
 import { Planet } from "../enums/Planet";
 
-const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
+const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
   const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
   const [destinationPlanet, setDestinationPlanet] = useState<Planet>(
     Planet.Earth
@@ -50,7 +50,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
       return;
     }
 
-    const newAddress: Delivery = {
+    const newDelivery: Delivery = {
       originPlanet,
       destinationPlanet,
       originLocation: originDescription,
@@ -59,7 +59,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
       notes,
     };
 
-    addAddress(newAddress);
+    addDelivery(newDelivery);
     setOriginDescription("");
     setDestinationDescription("");
     setPackageDescription("");
@@ -241,4 +241,4 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
   );
 };
 
-export default RegisterAddress;
+export default RegisterDelivery;

@@ -11,34 +11,38 @@ import {
 import { LocalShipping } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import AddressList from "./components/DeliveryList";
+import DeliveryList from "./components/DeliveryList";
 import { Delivery } from "./interfaces/Delivery";
-import EditAddress from "./pages/EditDelivery";
-import RegisterAddress from "./pages/RegisterDelivery";
+import EditDelivery from "./pages/EditDelivery";
+import RegisterDelivery from "./pages/RegisterDelivery";
 
 const App: React.FC = () => {
-  const [addresses, setAddresses] = useState<Delivery[]>([]);
-  const [selectedAddress, setSelectedAddress] = useState<Delivery | null>(null);
-  const [isNewAddressAdded, setIsNewAddressAdded] = useState<boolean>(false);
-  const [isAddressEdited, setIsAddressEdited] = useState<boolean>(false);
+  const [Deliveryes, setDeliveryes] = useState<Delivery[]>([]);
+  const [selectedDelivery, setSelectedDelivery] = useState<Delivery | null>(
+    null
+  );
+  const [isNewDeliveryAdded, setIsNewDeliveryAdded] = useState<boolean>(false);
+  const [isDeliveryEdited, setIsDeliveryEdited] = useState<boolean>(false);
 
-  const addAddress = (newAddress: Delivery) => {
-    setAddresses([...addresses, newAddress]);
-    setIsNewAddressAdded(true);
+  const addDelivery = (newDelivery: Delivery) => {
+    setDeliveryes([...Deliveryes, newDelivery]);
+    setIsNewDeliveryAdded(true);
   };
 
-  const updateAddress = (updatedAddress: Delivery) => {
-    setAddresses(
-      addresses.map((addr) =>
-        addr === selectedAddress ? updatedAddress : addr
+  const updateDelivery = (updatedDelivery: Delivery) => {
+    setDeliveryes(
+      Deliveryes.map((addr) =>
+        addr === selectedDelivery ? updatedDelivery : addr
       )
     );
-    setSelectedAddress(null);
-    setIsAddressEdited(true);
+    setSelectedDelivery(null);
+    setIsDeliveryEdited(true);
   };
 
-  const deleteAddress = (addressToDelete: Delivery) => {
-    setAddresses(addresses.filter((address) => address !== addressToDelete));
+  const deleteDelivery = (DeliveryToDelete: Delivery) => {
+    setDeliveryes(
+      Deliveryes.filter((Delivery) => Delivery !== DeliveryToDelete)
+    );
   };
 
   return (
@@ -93,25 +97,25 @@ const App: React.FC = () => {
             <Route
               path="/"
               element={
-                <AddressList
-                  addresses={addresses}
-                  setSelectedAddress={setSelectedAddress}
-                  deleteAddress={deleteAddress}
-                  isNewAddressAdded={isNewAddressAdded}
-                  isAddressEdited={isAddressEdited}
+                <DeliveryList
+                  Deliveryes={Deliveryes}
+                  setSelectedDelivery={setSelectedDelivery}
+                  deleteDelivery={deleteDelivery}
+                  isNewDeliveryAdded={isNewDeliveryAdded}
+                  isDeliveryEdited={isDeliveryEdited}
                 />
               }
             />
             <Route
               path="/register"
-              element={<RegisterAddress addAddress={addAddress} />}
+              element={<RegisterDelivery addDelivery={addDelivery} />}
             />
             <Route
               path="/edit"
               element={
-                <EditAddress
-                  address={selectedAddress}
-                  updateAddress={updateAddress}
+                <EditDelivery
+                  Delivery={selectedDelivery}
+                  updateDelivery={updateDelivery}
                 />
               }
             />

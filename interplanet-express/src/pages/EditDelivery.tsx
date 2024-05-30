@@ -14,11 +14,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Delivery } from "../interfaces/Delivery";
-import { EditAddressProps } from "../interfaces/EditDeliveryProps";
+import { EditDeliveryProps } from "../interfaces/EditDeliveryProps";
 
-const EditAddress: React.FC<EditAddressProps> = ({
-  address,
-  updateAddress,
+const EditDelivery: React.FC<EditDeliveryProps> = ({
+  Delivery,
+  updateDelivery,
 }) => {
   const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
   const [destinationPlanet, setDestinationPlanet] = useState<Planet>(
@@ -32,20 +32,20 @@ const EditAddress: React.FC<EditAddressProps> = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (address) {
-      setOriginPlanet(address.originPlanet);
-      setDestinationPlanet(address.destinationPlanet);
-      setOriginDescription(address.originLocation || "");
-      setDestinationDescription(address.destinationLocation || "");
-      setPackageDescription(address.packageDescription || "");
-      setNotes(address.notes || "");
+    if (Delivery) {
+      setOriginPlanet(Delivery.originPlanet);
+      setDestinationPlanet(Delivery.destinationPlanet);
+      setOriginDescription(Delivery.originLocation || "");
+      setDestinationDescription(Delivery.destinationLocation || "");
+      setPackageDescription(Delivery.packageDescription || "");
+      setNotes(Delivery.notes || "");
     }
-  }, [address]);
+  }, [Delivery]);
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    if (address) {
-      const updatedAddress: Delivery = {
+    if (Delivery) {
+      const updatedDelivery: Delivery = {
         originPlanet: originPlanet,
         destinationPlanet: destinationPlanet,
         originLocation: originDescription,
@@ -53,7 +53,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
         packageDescription: packageDescription,
         notes: notes,
       };
-      updateAddress(updatedAddress);
+      updateDelivery(updatedDelivery);
       navigate("/");
     }
   };
@@ -173,4 +173,4 @@ const EditAddress: React.FC<EditAddressProps> = ({
   );
 };
 
-export default EditAddress;
+export default EditDelivery;
