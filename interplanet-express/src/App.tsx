@@ -40,8 +40,6 @@ const App: React.FC = () => {
       <CssBaseline />
       <Container
         sx={{
-          backgroundColor: "#333",
-          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -61,13 +59,13 @@ const App: React.FC = () => {
           <AppBar position="static" sx={{ borderRadius: "8px 8px 0 0" }}>
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Address Manager
+                Interplanet Express
               </Typography>
               <Button color="inherit" component={Link} to="/">
-                Listar
+                Deliveries
               </Button>
               <Button color="inherit" component={Link} to="/register">
-                Cadastrar Endereço
+                New Delivery
               </Button>
             </Toolbar>
           </AppBar>
