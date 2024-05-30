@@ -64,7 +64,10 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
 
   const getPlanetStyle = (planet: string) => {
     return {
-      backgroundColor: planet === Planet.Earth ? "#A0C6E8" : "#FFB6A9",
+      backgroundColor:
+        planet === Planet.Earth
+          ? "rgb(160 198 232 / 60%)"
+          : "rgb(255 182 169 / 60%)",
       color: "black",
       padding: "4px 8px",
       borderRadius: "4px",
@@ -92,37 +95,41 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
       <List>
         {Deliveryes.map((Delivery, index) => (
           <ListItem key={index} divider>
-            <Grid container alignItems="center">
+            <Grid container>
+              <Grid item xs={1}></Grid>
               <Grid item xs={6}>
                 <ListItemText
                   primary={Delivery.originLocation}
                   secondary={Delivery.destinationLocation}
                 />
               </Grid>
-              <Grid item xs={3} display={"flex"} flexDirection={"row"}>
+              <Grid
+                item
+                xs={4}
+                display={"flex"}
+                flexDirection={"row"}
+                alignItems={"center"}
+              >
                 <span style={getPlanetStyle(Delivery.originPlanet)}>
                   {Delivery.originPlanet}
                 </span>
                 <span style={getPlanetStyle(Delivery.destinationPlanet)}>
                   {Delivery.destinationPlanet}
                 </span>
-              </Grid>
-              <Grid item xs={3} display={"flex"} flexDirection={"row-reverse"}>
-                <Tooltip title="Delete">
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => handleDeleteClick(Delivery)}
-                    style={{ marginLeft: "0.5rem" }}
-                  >
-                    <DeleteOutlineOutlined sx={{ color: pink[500] }} />
-                  </IconButton>
-                </Tooltip>
                 <Tooltip title="Edit">
                   <IconButton
                     aria-label="edit"
                     onClick={() => handleEditClick(Delivery)}
                   >
                     <EditOutlined color="primary" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteClick(Delivery)}
+                  >
+                    <DeleteOutlineOutlined sx={{ color: pink[500] }} />
                   </IconButton>
                 </Tooltip>
               </Grid>
