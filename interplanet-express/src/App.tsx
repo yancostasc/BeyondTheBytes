@@ -17,7 +17,7 @@ import EditDelivery from "./pages/EditDelivery";
 import RegisterDelivery from "./pages/RegisterDelivery";
 
 const App: React.FC = () => {
-  const [Deliveryes, setDeliveryes] = useState<Delivery[]>([]);
+  const [Deliveries, setDeliveries] = useState<Delivery[]>([]);
   const [selectedDelivery, setSelectedDelivery] = useState<Delivery | null>(
     null
   );
@@ -25,13 +25,13 @@ const App: React.FC = () => {
   const [isDeliveryEdited, setIsDeliveryEdited] = useState<boolean>(false);
 
   const addDelivery = (newDelivery: Delivery) => {
-    setDeliveryes([...Deliveryes, newDelivery]);
+    setDeliveries([...Deliveries, newDelivery]);
     setIsNewDeliveryAdded(true);
   };
 
   const updateDelivery = (updatedDelivery: Delivery) => {
-    setDeliveryes(
-      Deliveryes.map((addr) =>
+    setDeliveries(
+      Deliveries.map((addr) =>
         addr === selectedDelivery ? updatedDelivery : addr
       )
     );
@@ -40,8 +40,8 @@ const App: React.FC = () => {
   };
 
   const deleteDelivery = (DeliveryToDelete: Delivery) => {
-    setDeliveryes(
-      Deliveryes.filter((Delivery) => Delivery !== DeliveryToDelete)
+    setDeliveries(
+      Deliveries.filter((Delivery) => Delivery !== DeliveryToDelete)
     );
   };
 
@@ -98,7 +98,7 @@ const App: React.FC = () => {
               path="/"
               element={
                 <DeliveryList
-                  Deliveryes={Deliveryes}
+                  Deliveries={Deliveries}
                   setSelectedDelivery={setSelectedDelivery}
                   deleteDelivery={deleteDelivery}
                   isNewDeliveryAdded={isNewDeliveryAdded}

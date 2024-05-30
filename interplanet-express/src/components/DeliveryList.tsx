@@ -23,7 +23,7 @@ import { DeliveryListProps } from "../interfaces/DeliveryListProps";
 import { pink } from "@mui/material/colors";
 
 const DeliveryList: React.FC<DeliveryListProps> = ({
-  Deliveryes,
+  Deliveries,
   setSelectedDelivery,
   deleteDelivery,
   isNewDeliveryAdded,
@@ -93,7 +93,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
         </Tooltip>
       </Box>
       <List>
-        {Deliveryes.map((Delivery, index) => (
+        {Deliveries.map((Delivery, index) => (
           <ListItem key={index} divider>
             <Grid container>
               <Grid item xs={1}></Grid>
