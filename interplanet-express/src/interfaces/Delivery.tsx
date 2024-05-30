@@ -1,6 +1,6 @@
 import { Planet } from "../enums/Planet";
 
-export interface Address {
+export interface Delivery {
   originPlanet: Planet;
   destinationPlanet: Planet;
   originLocation: string;

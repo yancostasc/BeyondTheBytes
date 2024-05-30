@@ -18,8 +18,8 @@ import {
 } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { Planet } from "../enums/Planet";
-import { Address } from "../interfaces/Address";
-import { AddressListProps } from "../interfaces/AddressListProps";
+import { Delivery } from "../interfaces/Delivery";
+import { AddressListProps } from "../interfaces/DeliveryListProps";
 import { pink } from "@mui/material/colors";
 
 const AddressList: React.FC<AddressListProps> = ({
@@ -27,9 +27,11 @@ const AddressList: React.FC<AddressListProps> = ({
   setSelectedAddress,
   deleteAddress,
   isNewAddressAdded,
+  isAddressEdited,
 }) => {
   const navigate = useNavigate();
   const [showNewAddressAlert, setShowNewAddressAlert] = useState(false);
+  const [showEditedAddressAlert, setShowEditedAddressAlert] = useState(false);
 
   useEffect(() => {
     if (isNewAddressAdded) {
@@ -41,12 +43,22 @@ const AddressList: React.FC<AddressListProps> = ({
     }
   }, [isNewAddressAdded]);
 
-  const handleEditClick = (address: Address) => {
+  useEffect(() => {
+    if (isAddressEdited) {
+      setShowEditedAddressAlert(true);
+      const timeout = setTimeout(() => {
+        setShowEditedAddressAlert(false);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isAddressEdited]);
+
+  const handleEditClick = (address: Delivery) => {
     setSelectedAddress(address);
     navigate("/edit");
   };
 
-  const handleDeleteClick = (address: Address) => {
+  const handleDeleteClick = (address: Delivery) => {
     deleteAddress(address);
   };
 
@@ -125,6 +137,15 @@ const AddressList: React.FC<AddressListProps> = ({
       >
         <Alert severity="success" variant="filled">
           New address added!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={showEditedAddressAlert}
+        autoHideDuration={2000}
+        onClose={() => setShowEditedAddressAlert(false)}
+      >
+        <Alert severity="success" variant="filled">
+          Delivery edited successfully!
         </Alert>
       </Snackbar>
     </Box>

@@ -11,31 +11,33 @@ import {
 import { LocalShipping } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import AddressList from "./components/AddressList";
-import { Address } from "./interfaces/Address";
-import EditAddress from "./pages/EditAddress";
-import RegisterAddress from "./pages/RegisterAddress";
+import AddressList from "./components/DeliveryList";
+import { Delivery } from "./interfaces/Delivery";
+import EditAddress from "./pages/EditDelivery";
+import RegisterAddress from "./pages/RegisterDelivery";
 
 const App: React.FC = () => {
-  const [addresses, setAddresses] = useState<Address[]>([]);
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [addresses, setAddresses] = useState<Delivery[]>([]);
+  const [selectedAddress, setSelectedAddress] = useState<Delivery | null>(null);
   const [isNewAddressAdded, setIsNewAddressAdded] = useState<boolean>(false);
+  const [isAddressEdited, setIsAddressEdited] = useState<boolean>(false);
 
-  const addAddress = (newAddress: Address) => {
+  const addAddress = (newAddress: Delivery) => {
     setAddresses([...addresses, newAddress]);
     setIsNewAddressAdded(true);
   };
 
-  const updateAddress = (updatedAddress: Address) => {
+  const updateAddress = (updatedAddress: Delivery) => {
     setAddresses(
       addresses.map((addr) =>
         addr === selectedAddress ? updatedAddress : addr
       )
     );
     setSelectedAddress(null);
+    setIsAddressEdited(true);
   };
 
-  const deleteAddress = (addressToDelete: Address) => {
+  const deleteAddress = (addressToDelete: Delivery) => {
     setAddresses(addresses.filter((address) => address !== addressToDelete));
   };
 
@@ -96,6 +98,7 @@ const App: React.FC = () => {
                   setSelectedAddress={setSelectedAddress}
                   deleteAddress={deleteAddress}
                   isNewAddressAdded={isNewAddressAdded}
+                  isAddressEdited={isAddressEdited}
                 />
               }
             />

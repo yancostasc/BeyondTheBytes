@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Planet } from "../enums/Planet";
-import { Address } from "../interfaces/Address";
-import { EditAddressProps } from "../interfaces/EditAddressProps";
+import { Delivery } from "../interfaces/Delivery";
+import { EditAddressProps } from "../interfaces/EditDeliveryProps";
 
 const EditAddress: React.FC<EditAddressProps> = ({
   address,
@@ -45,7 +45,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     if (address) {
-      const updatedAddress: Address = {
+      const updatedAddress: Delivery = {
         originPlanet: originPlanet,
         destinationPlanet: destinationPlanet,
         originLocation: originDescription,
@@ -61,7 +61,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Edit Address
+        Edit Delivery
       </Typography>
       <form onSubmit={handleUpdate}>
         <Grid container spacing={2}>

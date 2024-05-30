@@ -16,8 +16,8 @@ import {
   Alert,
 } from "@mui/material";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { Address } from "../interfaces/Address";
-import { RegisterAddressProps } from "../interfaces/RegisterAddressProps";
+import { Delivery } from "../interfaces/Delivery";
+import { RegisterAddressProps } from "../interfaces/RegisterDeliveryProps";
 import { Planet } from "../enums/Planet";
 
 const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
@@ -50,7 +50,7 @@ const RegisterAddress: React.FC<RegisterAddressProps> = ({ addAddress }) => {
       return;
     }
 
-    const newAddress: Address = {
+    const newAddress: Delivery = {
       originPlanet,
       destinationPlanet,
       originLocation: originDescription,
