@@ -261,6 +261,12 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               variant="contained"
               sx={{
                 backgroundColor: "#8A2BE2",
+                "&:hover": {
+                  backgroundColor: "#8A2BE2",
+                },
+                "&:focus": {
+                  backgroundColor: "#8A2BE2",
+                },
               }}
             >
               Update

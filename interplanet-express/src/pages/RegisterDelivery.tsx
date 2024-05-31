@@ -332,6 +332,12 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               variant="contained"
               sx={{
                 backgroundColor: "#8A2BE2",
+                "&:hover": {
+                  backgroundColor: "#8A2BE2",
+                },
+                "&:focus": {
+                  backgroundColor: "#8A2BE2",
+                },
               }}
               onClick={(e) => handleSubmit(e, true)}
             >
@@ -342,6 +348,12 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               variant="contained"
               sx={{
                 backgroundColor: "#8A2BE2",
+                "&:hover": {
+                  backgroundColor: "#8A2BE2",
+                },
+                "&:focus": {
+                  backgroundColor: "#8A2BE2",
+                },
               }}
               onClick={(e) => handleSubmit(e, false)}
             >
