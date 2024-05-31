@@ -54,6 +54,18 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
     }
   }, [delivery]);
 
+  const handleOriginPlanetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOriginPlanet(e.target.value as Planet);
+    setOriginDescription("");
+  };
+
+  const handleDestinationPlanetChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDestinationPlanet(e.target.value as Planet);
+    setDestinationDescription("");
+  };
+
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     if (delivery) {
@@ -106,7 +118,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
                 aria-label="originPlanet"
                 name="originPlanet"
                 value={originPlanet}
-                onChange={(e) => setOriginPlanet(e.target.value as Planet)}
+                onChange={handleOriginPlanetChange}
               >
                 <FormControlLabel
                   value={Planet.Earth}
@@ -144,7 +156,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
                 aria-label="destinationPlanet"
                 name="destinationPlanet"
                 value={destinationPlanet}
-                onChange={(e) => setDestinationPlanet(e.target.value as Planet)}
+                onChange={handleDestinationPlanetChange}
               >
                 <FormControlLabel
                   value={Planet.Earth}
