@@ -73,7 +73,20 @@ const App: React.FC = () => {
             sx={{ borderRadius: "8px 8px 0 0", backgroundColor: "#8A2BE2" }}
           >
             <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  flexGrow: 1,
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
                 Interplanet Express
               </Typography>
               <Tooltip title="Deliveries">

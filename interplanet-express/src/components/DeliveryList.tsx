@@ -92,7 +92,13 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
         justifyContent="space-between"
         mb={2}
       >
-        <Typography variant="h4" component="h2">
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           Deliveries
         </Typography>
         <Tooltip title="New Delivery">
