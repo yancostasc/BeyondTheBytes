@@ -153,7 +153,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
           autoHideDuration={2000}
           onClose={handleCloseAlert}
         >
-          <Alert severity="success" variant="filled" sx={{ width: "100%" }}>
+          <Alert severity="success" variant="filled" sx={{ width: "100" }}>
             Delivery added successfully.
           </Alert>
         </Snackbar>
@@ -190,6 +190,9 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               }
               value={originDescription}
               onChange={(e) => setOriginDescription(e.target.value)}
+              inputProps={{
+                maxLength: originPlanet === Planet.Earth ? 100 : 4,
+              }}
               required
             />
           </Grid>
@@ -227,6 +230,9 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               }
               value={destinationDescription}
               onChange={(e) => setDestinationDescription(e.target.value)}
+              inputProps={{
+                maxLength: destinationPlanet === Planet.Earth ? 100 : 4,
+              }}
               required
             />
           </Grid>
@@ -237,6 +243,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               label="Package Description"
               value={packageDescription}
               onChange={(e) => setPackageDescription(e.target.value)}
+              inputProps={{ maxLength: 100 }}
               required
             />
           </Grid>
@@ -247,6 +254,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               label="Notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
+              inputProps={{ maxLength: 100 }}
             />
           </Grid>
           <Grid

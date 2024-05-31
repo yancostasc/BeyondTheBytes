@@ -111,7 +111,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                     delivery.destinationLatitude,
                     delivery.destinationLongitude,
                   ]}
-                  zoom={13}
+                  zoom={14}
                   style={{
                     height: "100%",
                     width: "100%",
@@ -134,16 +134,17 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                       ]}
                       radius={1000}
                       pathOptions={{
-                        fillColor: "rgba(255, 182, 169)", // Cor mais forte para o preenchimento
-                        color: "rgba(255, 182, 169)", // Cor mais forte para a borda
+                        fillColor: "rgba(255, 182, 169)",
+                        color: "rgba(255, 182, 169)",
                       }}
                     ></Circle>
                   ) : null}
                 </MapContainer>
               </Grid>
 
-              <Grid item xs={7} marginLeft={2}>
+              <Grid item xs={7} paddingLeft={2}>
                 <ListItemText
+                  sx={{ overflowWrap: "break-word" }}
                   primary={delivery.originLocation}
                   secondary={delivery.destinationLocation}
                 />
@@ -151,7 +152,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
 
               <Grid
                 item
-                xs={2}
+                xs={3}
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"flex-end"}

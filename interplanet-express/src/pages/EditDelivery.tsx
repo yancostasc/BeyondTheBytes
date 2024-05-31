@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Breadcrumbs,
@@ -12,7 +13,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { Planet } from "../enums/Planet";
 import { Delivery } from "../interfaces/Delivery";
@@ -35,7 +35,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
   const [originLatitude, setOriginLatitude] = useState<number>(0);
   const [originLongitude, setOriginLongitude] = useState<number>(0);
   const [destinationLatitude, setDestinationLatitude] = useState<number>(0);
-  const [destinationLongitude, setDestinationv] = useState<number>(0);
+  const [destinationLongitude, setDestinationLongitude] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
       setOriginLatitude(delivery.originLatitude || 0);
       setOriginLongitude(delivery.originLongitude || 0);
       setDestinationLatitude(delivery.destinationLatitude || 0);
-      setDestinationv(delivery.destinationLongitude || 0);
+      setDestinationLongitude(delivery.destinationLongitude || 0);
     }
   }, [delivery]);
 
@@ -131,6 +131,9 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               value={originDescription}
               onChange={(e) => setOriginDescription(e.target.value)}
               required
+              inputProps={{
+                maxLength: originPlanet === Planet.Earth ? 100 : 4,
+              }}
             />
           </Grid>
           <Grid item xs={3}>
@@ -168,6 +171,9 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               value={destinationDescription}
               onChange={(e) => setDestinationDescription(e.target.value)}
               required
+              inputProps={{
+                maxLength: originPlanet === Planet.Earth ? 100 : 4,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -178,6 +184,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               value={packageDescription}
               onChange={(e) => setPackageDescription(e.target.value)}
               required
+              inputProps={{ maxLength: 100 }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -187,6 +194,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               label="Notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
+              inputProps={{ maxLength: 100 }}
             />
           </Grid>
           <Grid

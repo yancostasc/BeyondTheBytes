@@ -8,7 +8,7 @@ import {
   Box,
   Tooltip,
 } from "@mui/material";
-import { LocalShipping } from "@mui/icons-material";
+import { RocketLaunchOutlined } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import DeliveryList from "./components/DeliveryList";
@@ -36,11 +36,13 @@ const App: React.FC = () => {
         delivery === selectedDelivery ? updatedDelivery : delivery
       )
     );
+    setIsNewDeliveryAdded(false);
     setSelectedDelivery(null);
     setIsDeliveryEdited(true);
   };
 
   const deleteDelivery = (deliveryToDelete: Delivery) => {
+    setIsNewDeliveryAdded(false);
     setDeliveries(
       deliveries.filter((deliveries) => deliveries !== deliveryToDelete)
     );
@@ -74,7 +76,7 @@ const App: React.FC = () => {
               </Typography>
               <Tooltip title="Deliveries">
                 <IconButton color="inherit" component={Link} to="/">
-                  <LocalShipping />
+                  <RocketLaunchOutlined />
                 </IconButton>
               </Tooltip>
             </Toolbar>
