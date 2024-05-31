@@ -23,7 +23,7 @@ import { countriesAndCapitals } from "../data/Countries";
 import { v4 as uuidv4 } from "uuid";
 
 const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
-  const [deliveryId, setDeliveryId] = useState("");
+  const [, setDeliveryId] = useState("");
   const [originPlanet, setOriginPlanet] = useState<Planet>(Planet.Earth);
   const [destinationPlanet, setDestinationPlanet] = useState<Planet>(
     Planet.Earth
@@ -117,6 +117,18 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
     navigate("/");
   };
 
+  const handleOriginPlanetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOriginPlanet(e.target.value as Planet);
+    setOriginDescription("");
+  };
+
+  const handleDestinationPlanetChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDestinationPlanet(e.target.value as Planet);
+    setDestinationDescription("");
+  };
+
   return (
     <Box>
       <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
@@ -166,7 +178,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
                 aria-label="originPlanet"
                 name="originPlanet"
                 value={originPlanet}
-                onChange={(e) => setOriginPlanet(e.target.value as Planet)}
+                onChange={handleOriginPlanetChange}
               >
                 <FormControlLabel
                   value={Planet.Earth}
@@ -186,7 +198,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               fullWidth
               margin="normal"
               label={
-                originPlanet === Planet.Earth ? "City, Country" : "4-digit Lot"
+                originPlanet === Planet.Earth ? "City, Country" : "4-digit"
               }
               value={originDescription}
               onChange={(e) => setOriginDescription(e.target.value)}
@@ -204,7 +216,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
                 aria-label="destinationPlanet"
                 name="destinationPlanet"
                 value={destinationPlanet}
-                onChange={(e) => setDestinationPlanet(e.target.value as Planet)}
+                onChange={handleDestinationPlanetChange}
               >
                 <FormControlLabel
                   value={Planet.Earth}
