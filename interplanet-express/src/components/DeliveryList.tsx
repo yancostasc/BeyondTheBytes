@@ -96,8 +96,8 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
           Deliveries
         </Typography>
         <Tooltip title="New Delivery">
-          <IconButton color="primary" component={RouterLink} to="/register">
-            <AddCircleOutline />
+          <IconButton component={RouterLink} to="/register">
+            <AddCircleOutline htmlColor="#8A2BE2" />
           </IconButton>
         </Tooltip>
       </Box>
@@ -162,7 +162,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                     aria-label="view"
                     onClick={() => handleViewClick(delivery)}
                   >
-                    <ArticleOutlined color="primary" />
+                    <ArticleOutlined sx={{ color: "#8A2BE2" }} />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Edit">
@@ -170,7 +170,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                     aria-label="edit"
                     onClick={() => handleEditClick(delivery)}
                   >
-                    <EditOutlined color="primary" />
+                    <EditOutlined sx={{ color: "#8A2BE2" }} />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">

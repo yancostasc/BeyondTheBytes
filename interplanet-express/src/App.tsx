@@ -61,7 +61,6 @@ const App: React.FC = () => {
       >
         <Box
           sx={{
-            backgroundColor: "#fff",
             width: "100%",
             maxWidth: "800px",
             borderRadius: "8px 8px 0 0",
@@ -69,7 +68,10 @@ const App: React.FC = () => {
             overflow: "hidden",
           }}
         >
-          <AppBar position="static" sx={{ borderRadius: "8px 8px 0 0" }}>
+          <AppBar
+            position="static"
+            sx={{ borderRadius: "8px 8px 0 0", backgroundColor: "#8A2BE2" }}
+          >
             <Toolbar>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Interplanet Express

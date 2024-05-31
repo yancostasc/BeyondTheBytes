@@ -182,12 +182,30 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               >
                 <FormControlLabel
                   value={Planet.Earth}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Earth"
                 />
                 <FormControlLabel
                   value={Planet.Mars}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Mars"
                 />
               </RadioGroup>
@@ -206,6 +224,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
                 maxLength: originPlanet === Planet.Earth ? 100 : 4,
               }}
               required
+              color="secondary"
             />
           </Grid>
           <Grid item xs={3}>
@@ -220,12 +239,30 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               >
                 <FormControlLabel
                   value={Planet.Earth}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Earth"
                 />
                 <FormControlLabel
                   value={Planet.Mars}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Mars"
                 />
               </RadioGroup>
@@ -246,6 +283,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
                 maxLength: destinationPlanet === Planet.Earth ? 100 : 4,
               }}
               required
+              color="secondary"
             />
           </Grid>
           <Grid item xs={12}>
@@ -257,6 +295,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               onChange={(e) => setPackageDescription(e.target.value)}
               inputProps={{ maxLength: 100 }}
               required
+              color="secondary"
             />
           </Grid>
           <Grid item xs={12}>
@@ -267,6 +306,7 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               inputProps={{ maxLength: 100 }}
+              color="secondary"
             />
           </Grid>
           <Grid
@@ -277,13 +317,22 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
             gap={2}
             marginTop={4}
           >
-            <Button variant="outlined" color="warning" onClick={handleCancel}>
+            <Button
+              variant="outlined"
+              sx={{
+                color: "#CC1034",
+                borderColor: "#CC1034",
+              }}
+              onClick={handleCancel}
+            >
               Cancel
             </Button>
             <Button
               type="submit"
               variant="contained"
-              color="primary"
+              sx={{
+                backgroundColor: "#8A2BE2",
+              }}
               onClick={(e) => handleSubmit(e, true)}
             >
               Save
@@ -291,7 +340,9 @@ const RegisterDelivery: React.FC<RegisterDeliveryProps> = ({ addDelivery }) => {
             <Button
               type="submit"
               variant="contained"
-              color="primary"
+              sx={{
+                backgroundColor: "#8A2BE2",
+              }}
               onClick={(e) => handleSubmit(e, false)}
             >
               Save Another

@@ -122,12 +122,30 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               >
                 <FormControlLabel
                   value={Planet.Earth}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Earth"
                 />
                 <FormControlLabel
                   value={Planet.Mars}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Mars"
                 />
               </RadioGroup>
@@ -146,6 +164,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               inputProps={{
                 maxLength: originPlanet === Planet.Earth ? 100 : 4,
               }}
+              color="secondary"
             />
           </Grid>
           <Grid item xs={3}>
@@ -160,12 +179,30 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               >
                 <FormControlLabel
                   value={Planet.Earth}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Earth"
                 />
                 <FormControlLabel
                   value={Planet.Mars}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#8A2BE2",
+                        "&.Mui-checked": {
+                          color: "#8A2BE2",
+                        },
+                      }}
+                    />
+                  }
                   label="Mars"
                 />
               </RadioGroup>
@@ -186,6 +223,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               inputProps={{
                 maxLength: originPlanet === Planet.Earth ? 100 : 4,
               }}
+              color="secondary"
             />
           </Grid>
           <Grid item xs={12}>
@@ -197,6 +235,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               onChange={(e) => setPackageDescription(e.target.value)}
               required
               inputProps={{ maxLength: 100 }}
+              color="secondary"
             />
           </Grid>
           <Grid item xs={12}>
@@ -207,6 +246,7 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               inputProps={{ maxLength: 100 }}
+              color="secondary"
             />
           </Grid>
           <Grid
@@ -216,7 +256,13 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
             justifyContent="flex-end"
             marginTop={2}
           >
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundColor: "#8A2BE2",
+              }}
+            >
               Update
             </Button>
           </Grid>
