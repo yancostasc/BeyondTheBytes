@@ -42,19 +42,16 @@ const ViewDelivery: React.FC<ViewDeliveryProps> = ({ delivery }) => {
         Delivery Details
       </Typography>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Box p={2}>
-            <Typography variant="h6" component="h3" gutterBottom>
-              Destination Delivery
-            </Typography>
             <MapContainer
               center={[
                 delivery.destinationLatitude,
                 delivery.destinationLongitude,
               ]}
-              zoom={15}
+              zoom={12}
               style={{
-                height: "400px",
+                height: "300px",
                 borderRadius: "8px",
                 overflow: "hidden",
               }}
@@ -85,48 +82,48 @@ const ViewDelivery: React.FC<ViewDeliveryProps> = ({ delivery }) => {
             </MapContainer>
           </Box>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={6}>
           <Box p={2}>
             <Typography variant="h6" component="h3" gutterBottom>
-              Origin
+              <strong>Origin</strong>
             </Typography>
             <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
-              Location: {delivery.originLocation}
+              <strong>Location:</strong> {delivery.originLocation}
             </Typography>
             <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
-              Planet: {delivery.originPlanet}
+              <strong>Planet:</strong> {delivery.originPlanet}
             </Typography>
           </Box>
-        </Grid>
-        <Grid item xs={3}>
           <Box p={2}>
             <Typography variant="h6" component="h3" gutterBottom>
-              Destination
+              <strong>Destination</strong>
             </Typography>
             <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
-              Location: {delivery.destinationLocation}
+              <strong>Location:</strong> {delivery.destinationLocation}
             </Typography>
             <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
-              Planet: {delivery.destinationPlanet}
+              <strong>Planet:</strong> {delivery.destinationPlanet}
             </Typography>
           </Box>
-        </Grid>
-        <Grid item xs={3}>
           <Box p={2}>
             <Typography variant="h6" component="h3" gutterBottom>
-              Description
+              <strong>Description</strong>
             </Typography>
-            <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
+            <Typography
+              variant="body2"
+              sx={{ overflowWrap: "break-word", color: "#757575" }}
+            >
               {delivery.packageDescription}
             </Typography>
           </Box>
-        </Grid>
-        <Grid item xs={3}>
           <Box p={2}>
             <Typography variant="h6" component="h3" gutterBottom>
-              Notes
+              <strong>Notes</strong>
             </Typography>
-            <Typography variant="body1" sx={{ overflowWrap: "break-word" }}>
+            <Typography
+              variant="body2"
+              sx={{ overflowWrap: "break-word", color: "#757575" }}
+            >
               {delivery.notes}
             </Typography>
           </Box>
