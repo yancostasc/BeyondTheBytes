@@ -161,10 +161,10 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               value={originDescription}
               onChange={(e) => setOriginDescription(e.target.value)}
               required
+              color="secondary"
               inputProps={{
                 maxLength: originPlanet === Planet.Earth ? 100 : 4,
               }}
-              color="secondary"
             />
           </Grid>
           <Grid item xs={3}>
@@ -220,10 +220,10 @@ const EditDelivery: React.FC<EditDeliveryProps> = ({
               value={destinationDescription}
               onChange={(e) => setDestinationDescription(e.target.value)}
               required
-              inputProps={{
-                maxLength: originPlanet === Planet.Earth ? 100 : 4,
-              }}
               color="secondary"
+              inputProps={{
+                maxLength: destinationPlanet === Planet.Earth ? 100 : 4,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
