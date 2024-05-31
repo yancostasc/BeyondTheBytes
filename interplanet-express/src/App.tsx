@@ -15,6 +15,7 @@ import DeliveryList from "./components/DeliveryList";
 import { Delivery } from "./interfaces/Delivery";
 import EditDelivery from "./pages/EditDelivery";
 import RegisterDelivery from "./pages/RegisterDelivery";
+import ViewDelivery from "./pages/ViewDelivery";
 
 const App: React.FC = () => {
   const [deliveries, setDeliveries] = useState<Delivery[]>([]);
@@ -109,6 +110,10 @@ const App: React.FC = () => {
             <Route
               path="/register"
               element={<RegisterDelivery addDelivery={addDelivery} />}
+            />
+            <Route
+              path="/view/:deliveryId"
+              element={<ViewDelivery delivery={selectedDelivery} />}
             />
             <Route
               path="/edit/:deliveryId"

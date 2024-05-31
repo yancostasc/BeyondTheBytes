@@ -61,6 +61,11 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
     navigate(`/edit/${delivery.deliveryId}`);
   };
 
+  const handleViewClick = (delivery: Delivery) => {
+    setSelectedDelivery(delivery);
+    navigate(`/view/${delivery.deliveryId}`);
+  };
+
   const handleDeleteClick = (Delivery: Delivery) => {
     deleteDelivery(Delivery);
   };
@@ -154,7 +159,7 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                 <Tooltip title="View">
                   <IconButton
                     aria-label="view"
-                    onClick={() => handleEditClick(delivery)}
+                    onClick={() => handleViewClick(delivery)}
                   >
                     <ArticleOutlined color="primary" />
                   </IconButton>
