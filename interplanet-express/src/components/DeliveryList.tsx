@@ -151,17 +151,29 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
               <Grid item xs={7} paddingLeft={2}>
                 <ListItemText
                   sx={{ overflowWrap: "break-word" }}
-                  primary={delivery.originLocation}
-                  secondary={delivery.destinationLocation}
+                  primary={delivery.packageDescription}
+                  secondary={delivery.notes}
                 />
+                <Box display="flex" marginTop={1}>
+                  <Tooltip title="Origin Planet">
+                    <span style={getPlanetStyle(delivery.originPlanet)}>
+                      {delivery.originPlanet}
+                    </span>
+                  </Tooltip>
+                  <Tooltip title="Destination Planet">
+                    <span style={getPlanetStyle(delivery.destinationPlanet)}>
+                      {delivery.destinationPlanet}
+                    </span>
+                  </Tooltip>
+                </Box>
               </Grid>
 
               <Grid
                 item
                 xs={3}
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"flex-end"}
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
               >
                 <Tooltip title="View">
                   <IconButton
@@ -186,26 +198,6 @@ const DeliveryList: React.FC<DeliveryListProps> = ({
                   >
                     <DeleteOutlineOutlined sx={{ color: pink[500] }} />
                   </IconButton>
-                </Tooltip>
-              </Grid>
-
-              <Grid
-                item
-                xs={12}
-                display={"flex"}
-                alignItems={"center"}
-                marginTop={1}
-                marginLeft={1.8}
-              >
-                <Tooltip title={"Origin Planet"}>
-                  <span style={getPlanetStyle(delivery.originPlanet)}>
-                    {delivery.originPlanet}
-                  </span>
-                </Tooltip>
-                <Tooltip title={"Destination Planet"}>
-                  <span style={getPlanetStyle(delivery.destinationPlanet)}>
-                    {delivery.destinationPlanet}
-                  </span>
                 </Tooltip>
               </Grid>
             </Grid>
